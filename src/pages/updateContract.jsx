@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import UserService from "../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import ArchiveDataGrid from "component/ArchiveDataGrid";
+import FormUpdateContract from "component/FormUpdateContract";
 
-function Archive() {
+function Contract() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,9 +22,9 @@ function Archive() {
 
   return (
     <Box>
-      <ArchiveDataGrid />
+      <FormUpdateContract />
     </Box>
   );
 }
 
-export default Archive;
+export default Contract;

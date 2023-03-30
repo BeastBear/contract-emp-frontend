@@ -28,28 +28,32 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 
 const navItems = [
-  {
-    text: "Dashboard",
-    icon: <HomeOutlined />,
-  },
+  //{
+  //text: "Dashboard",
+  //icon: <HomeOutlined />,
+  //},
   // {
   //   text: "Client Facing",
   //   icon: null,
   // },
-  {
+  /*{
     text: "Archive",
+    thaitext: "ประวัติ",
     icon: <ArchiveOutlined />,
-  },
+  },*/
   {
     text: "Contract",
+    thaitext: "ข้อมูลสัญญาจ้าง",
     icon: <DescriptionOutlined/>,
   },
   {
     text: "Company",
+    thaitext: "ข้อมูลบริษัท",
     icon: <ApartmentOutlined />,
   },
   {
     text: "Employee",
+    thaitext: "ข้อมูลลูกจ้างจ้างเหมา",
     icon: <GroupsOutlined />,
   },
   // {
@@ -58,6 +62,7 @@ const navItems = [
   // },
   {
     text: "User",
+    thaitext: "ข้อมูลผู้ใช้งาน",
     icon: <PersonOutlineOutlined />,
   },
   // {
@@ -126,7 +131,7 @@ const Sidebar = ({
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
-                    ECOMVISION
+                    การไฟฟ้าฝ่ายผลิตแห่งประเทศไทย
                   </Typography>
                 </Box>
                 {!isNonMobile && (
@@ -137,7 +142,7 @@ const Sidebar = ({
               </FlexBetween>
             </Box>
             <List>
-              {navItems.map(({ text, icon }) => {
+              {navItems.map(({ text,thaitext, icon }) => {
                 if (!icon) {
                   return (
                     <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
@@ -176,7 +181,7 @@ const Sidebar = ({
                       >
                         {icon}
                       </ListItemIcon>
-                      <ListItemText primary={text} />
+                      <ListItemText primary={thaitext||"xxx"} />
                       {active === lcText && (
                         <ChevronRightOutlined sx={{ ml: "auto" }} />
                       )}

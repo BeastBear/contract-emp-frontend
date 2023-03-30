@@ -1,5 +1,16 @@
 // color design tokens export
 export const tokensDark = {
+  blue: {
+      100: "#cfcdec",
+      200: "#9f9bd9",
+      300: "#706ac5",
+      400: "#4038b2",
+      500: "#10069f",
+      600: "#0d057f",
+      700: "#0a045f",
+      800: "#060240",
+      900: "#030120"
+},
   grey: {
     0: "#ffffff", // manually adjusted
     10: "#f6f6f6", // manually adjusted
@@ -104,6 +115,7 @@ export const themeSettings = (mode) => {
             background: {
               default: tokensDark.grey[0],
               alt: tokensDark.grey[50],
+              test: tokensDark.grey[200]
             },
           }),
     },

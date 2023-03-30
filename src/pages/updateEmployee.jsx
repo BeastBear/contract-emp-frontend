@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import UserService from '../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-import FormUpdateCompany from 'component/FormUpdateCompany'
+import FormUpdateEmployee from 'component/FormUpdateEmployee'
 
-function Companies() {
+function Employees() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,9 +23,9 @@ function Companies() {
 
   return (
     <Box>
-      <FormUpdateCompany/>
+      <FormUpdateEmployee/>
     </Box>
   );
 }
 
-export default Companies;
+export default Employees;

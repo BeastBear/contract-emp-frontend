@@ -52,6 +52,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
+          {/*
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
             borderRadius="9px"
@@ -64,6 +65,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               <Search />
             </IconButton>
           </FlexBetween>
+          */}
         </FlexBetween>
 
         {/* RIGHT SIDE */}
@@ -122,7 +124,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
+              <MenuItem onClick={handleLogout}>ล็อกเอาท์</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>

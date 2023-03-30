@@ -17,10 +17,6 @@ const updateCompany = (id, updateData) => {
   return http.put(`/company/${id.toString()}`, updateData);
 }
 
-const getCompanyWithParams = () => {
-  return http.get(`/company/`)
-}
-
 const getCompanyById = (id) => {
   return http.get(`/company/search/?id=${id}`).then(response => {
     return response;
