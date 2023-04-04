@@ -30,13 +30,13 @@ const Employees = () => {
 
   const handleDeleteButtonClick = async () => {
     if (selectionModel.length === 0) {
-      swal("กรุณาเลือกพนักงานอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
+      swal("กรุณาเลือกลูกจ้างอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
       return;
     }
   
     swal({
       title: "แน่ใจหรือไม่?",
-      text: "เมื่อลบแล้ว, พนักงานที่คุณเลือกไว้จะถูกลบหายไป!",
+      text: "เมื่อลบแล้ว, ลูกจ้างที่คุณเลือกไว้จะถูกลบหายไป!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -49,7 +49,7 @@ const Employees = () => {
         );
         setEmployees(employees.filter((employee) => !selectionModel.includes(employee.id)));
         setSelectionModel([]);
-        swal("The selected employees have been deleted successfully!", { icon: "success" });
+        swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
       }
     });
   };
@@ -127,13 +127,13 @@ const Employees = () => {
   return (
     <Box m="1.5rem 2.5rem">
   <FlexBetween>
-    <Header title="พนักงาน" />
+    <Header title="ลูกจ้างจ้างเหมาบริการ" />
     <Box>
       <FlexBetween gap="1rem">
         <Button
           sx={{
-            backgroundColor: theme.palette.secondary.light,
-            color: theme.palette.background.alt,
+            backgroundColor: theme.palette.blue[300],
+            color: theme.palette.neutral.font,
             fontSize: "14px",
             fontWeight: "bold",
             padding: "10px 20px",
@@ -141,13 +141,13 @@ const Employees = () => {
           onClick = {createClick}
         >
           <CreateOutlined sx={{ mr: "10px" }} />
-          เพิ่มพนักงาน
+          เพิ่มลูกจ้าง
         </Button>
         
         <Button
           sx={{
             backgroundColor: theme.palette.secondary.light,
-            color: theme.palette.background.alt,
+            color: theme.palette.neutral.font,
             fontSize: "14px",
             fontWeight: "bold",
             padding: "10px 20px",
@@ -155,14 +155,14 @@ const Employees = () => {
           onClick = {handleDeleteButtonClick}
         >
           <DeleteOutline sx={{ mr: "10px" }} />
-          ลบพนักงาน
+          ลบลูกจ้าง
         </Button>
       </FlexBetween>
       </Box>
   </FlexBetween>
   <Box height="calc(100vh - 200px)"  sx={{ mt: "1.5rem" }}>
     <DataGrid
-      
+      sx={{color: theme.palette.grey[1000]}}
       rows={employees}
       columns={columns}
       getRowId={getRowId}

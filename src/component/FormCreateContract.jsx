@@ -1,24 +1,43 @@
-import React, { useState } from "react";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, TextField, Button, Typography, Select, MenuItem, InputLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../services/ContractService";
+import CompanyService from "../services/CompanyService";
 import Header from "./Header";
 import FlexBetween from "./FlexBetween";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CreateContracts = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [contractName, setContractName] = useState("");
-  const [contractAddress, setContractAddress] = useState("");
-  const [contractPhone, setContractPhone] = useState("");
+  const [contractNumber, setContractNumber] = useState("");
+  const [contractStartDate, setContractStartDate] = useState(null);
+  const [contractEndDate, setContractEndDate] = useState(null);
+  const [contractCompanyId, setContractCompanyId] = useState("");
+  const [companies, setCompanies] = useState([]);
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await CompanyService.getCompanies();
+        setCompanies(response.data);
+      } catch (error) {
+        console.error("Error:", error.response);
+        setError(error.response.data.message);
+      }
+    };
+    fetchCompanies();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await ContractService.postContract({
-        name: contractName,
-        address: contractAddress,
-        telephone: contractPhone,
+        number: contractNumber,
+        start_date: contractStartDate,
+        end_date: contractEndDate,
+        company_id: contractCompanyId
       });
       if (response.status === 200) {
         navigate("/contract");
@@ -40,28 +59,43 @@ const CreateContracts = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
+        <InputLabel>เลขที่สัญญา: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
-            label="Contract Name"
-            value={contractName}
-            onChange={(e) => setContractName(e.target.value)}
+            value={contractNumber}
+            onChange={(e) => setContractNumber(e.target.value)}
             helperText=""
           />
+         <InputLabel>วันเริ่ม: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
-            label="Contract Address"
-            value={contractAddress}
-            onChange={(e) => setContractAddress(e.target.value)}
+            type="date"
+            value={contractStartDate ? contractStartDate.toISOString().substr(0,10) : ""}
+            onChange={(e) => setContractStartDate(new Date(e.target.value))}
           />
+          <InputLabel>วันสิ้นสุด: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
-            label="Contract Phone"
-            value={contractPhone}
-            onChange={(e) => setContractPhone(e.target.value)}
+            type="date"
+            value={contractEndDate ? contractEndDate.toISOString().substr(0,10) : ""}
+            onChange={(e) => setContractEndDate(new Date(e.target.value))}
           />
+          <InputLabel>ชื่อบริษัท: </InputLabel>
+          <Select
+            fullWidth
+            margin="normal"
+            value={contractCompanyId}
+            onChange={(e) => setContractCompanyId(e.target.value)}
+          >
+            {companies.map((company) => (
+              <MenuItem key={company.id} value={company.id}>
+                {company.name}
+              </MenuItem>
+            ))}
+          </Select>
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
               Create
@@ -74,6 +108,7 @@ const CreateContracts = () => {
               Cancel
             </Button>
           </Box>
+
           {error && (
             <Typography color="error" variant="body1" sx={{ mt: "1rem" }}>
               {error}
